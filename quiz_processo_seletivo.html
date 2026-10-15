@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Processo Seletivo - CODE[] Júnior</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+    <style>
+        body { 
+            font-family: 'Inter', sans-serif; 
+            background-color: #130729; 
+            color: #e5e7eb;
+        }
+        .font-logo { font-family: 'Share Tech Mono', monospace; }
+        .fade-in { animation: fadeIn 0.4s ease-in-out; }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #0d041c; }
+        ::-webkit-scrollbar-thumb { background: #d93dd1; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #bd32b6; }
+        
+        /* Scrollbar específica para textareas */
+        textarea::-webkit-scrollbar { width: 6px; }
+        textarea::-webkit-scrollbar-track { background: #130729; border-radius: 4px; }
+        textarea::-webkit-scrollbar-thumb { background: #220d47; border-radius: 4px; }
+        textarea::-webkit-scrollbar-thumb:hover { background: #d93dd1; }
+    </style>
+</head>
+<body class="antialiased min-h-screen flex flex-col">
+
+    <header class="bg-[#0d041c] border-b border-[#d93dd1]/20 shadow-[0_4px_20px_rgba(217,61,209,0.1)] sticky top-0 z-10">
+        <div class="max-w-4xl mx-auto px-4 py-4 flex justify-between items-center">
+            <div class="flex flex-col items-start justify-center">
+                <div class="text-2xl md:text-3xl font-normal tracking-tight flex items-center font-logo">
+                    <span class="text-[#d93dd1]">CODE</span><span class="text-[#25f36e]">[]</span>
+                </div>
+                <div class="text-[8px] md:text-[9px] text-gray-400 tracking-widest mt-0.5 uppercase font-semibold">Soluções em Tecnologia Júnior</div>
+            </div>
+            <div id="user-status" class="text-xs font-mono text-[#25f36e] bg-[#25f36e]/10 px-2 py-1 rounded border border-[#25f36e]/30">Conectando...</div>
+        </div>
+    </header>
+
+    <main class="flex-grow flex items-center justify-center p-4">
+        <div class="max-w-3xl w-full">
+            
+            <div id="loading-screen" class="bg-[#220d47] rounded-2xl border border-[#d93dd1]/30 shadow-[0_0_20px_rgba(217,61,209,0.15)] p-12 text-center fade-in">
+                <div class="inline-block animate-spin rounded-full h-10 w-10 border-b-2 border-[#d93dd1] mb-4"></div>
+                <p class="text-gray-300 font-mono">Estabelecendo conexão segura...</p>
+            </div>
+
+            <div id="welcome-screen" class="hidden bg-[#220d47] rounded-2xl border border-[#d93dd1]/30 shadow-[0_0_20px_rgba(217,61,209,0.15)] p-8 md:p-12 fade-in">
+                <div class="text-center mb-10">
+                    <div class="flex flex-col items-center justify-center mb-6">
+                        <div class="text-5xl md:text-6xl font-normal tracking-tight flex items-center font-logo mb-2">
+                            <span class="text-[#d93dd1]">CODE</span><span class="text-[#25f36e]">[]</span>
+                        </div>
+                        <div class="text-[10px] md:text-xs text-gray-400 tracking-[0.2em] uppercase font-semibold">Soluções em Tecnologia Júnior</div>
+                    </div>
+                    <h2 class="text-2xl font-bold text-gray-100 mb-2">Processo Seletivo Tech</h2>
+                    <p class="text-gray-400">Identifique-se para iniciar o desafio lógico.</p>
+                </div>
+                <form id="welcome-form" class="space-y-6 max-w-md mx-auto">
+                    <div>
+                        <label for="candidate-name" class="block text-sm font-medium text-gray-300 mb-1 font-mono">> Nome_Completo</label>
+                        <input type="text" id="candidate-name" required class="w-full px-4 py-3 rounded-lg border border-gray-700 bg-[#0d041c] text-white placeholder-gray-600 focus:ring-1 focus:ring-[#d93dd1] focus:border-[#d93dd1] outline-none transition-all shadow-inner" placeholder="Ex: Maria Silva">
+                    </div>
+                    <div>
+                        <label for="candidate-email" class="block text-sm font-medium text-gray-300 mb-1 font-mono">> E-mail</label>
+                        <input type="email" id="candidate-email" required class="w-full px-4 py-3 rounded-lg border border-gray-700 bg-[#0d041c] text-white placeholder-gray-600 focus:ring-1 focus:ring-[#d93dd1] focus:border-[#d93dd1] outline-none transition-all shadow-inner" placeholder="Ex: maria@email.com">
+                    </div>
+                    <button type="submit" class="w-full bg-[#d93dd1] hover:bg-[#bd32b6] text-white font-bold py-3 px-6 rounded-lg transition-all shadow-[0_0_15px_rgba(217,61,209,0.4)] hover:shadow-[0_0_25px_rgba(217,61,209,0.6)] flex justify-center items-center gap-2">
+                        INICIAR_AVALIAÇÃO()
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+                    </button>
+                </form>
+            </div>
+
+            <div id="quiz-screen" class="hidden fade-in">
+                <div class="bg-[#220d47] rounded-2xl border border-[#d93dd1]/30 shadow-[0_0_20px_rgba(217,61,209,0.15)] p-8 md:p-12">
+                    <div class="mb-8 border-b border-gray-700 pb-6">
+                        <h2 class="text-2xl font-bold text-gray-100 flex items-center gap-2">
+                            <span class="text-[#25f36e] font-logo">>_</span> Teste de Lógica e Programação
+                        </h2>
+                        <p class="text-gray-400 mt-2 text-sm">Responda às questões abaixo com atenção. Nas questões abertas, utilize pseudocódigo ou a estrutura lógica que preferir.</p>
+                    </div>
+                    <form id="quiz-form" class="space-y-8">
+                        <div id="questions-container" class="space-y-8">
+                            <!-- Perguntas serão injetadas aqui via JS -->
+                        </div>
+                        <div class="pt-8 border-t border-gray-700 flex justify-end mt-8">
+                            <button type="submit" id="submit-quiz-btn" class="bg-[#25f36e] hover:bg-[#1fcc5c] text-[#0d041c] font-bold py-3 px-8 rounded-lg transition-all shadow-[0_0_15px_rgba(37,243,110,0.4)] hover:shadow-[0_0_25px_rgba(37,243,110,0.6)] flex items-center gap-2 disabled:opacity-50">
+                                COMMIT_RESPOSTAS
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <div id="success-screen" class="hidden bg-[#220d47] rounded-2xl border border-[#25f36e]/50 shadow-[0_0_30px_rgba(37,243,110,0.15)] p-12 text-center fade-in">
+                <div class="w-20 h-20 bg-[#25f36e]/10 rounded-full flex items-center justify-center mx-auto mb-6 border border-[#25f36e]/30 shadow-[0_0_20px_rgba(37,243,110,0.3)]">
+                    <svg class="w-10 h-10 text-[#25f36e]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                </div>
+                <h2 class="text-3xl font-bold text-gray-100 mb-4">Respostas Enviadas!</h2>
+                <p class="text-gray-400 text-lg mb-8 font-mono">Status: 200 OK. Nossa equipe avaliará seu código em breve.</p>
+                <button onclick="window.location.reload()" class="text-[#d93dd1] hover:text-[#bd32b6] font-medium font-mono hover:underline">> return home;</button>
+            </div>
+
+            <div id="admin-screen" class="hidden fade-in space-y-6">
+                <div class="bg-[#220d47] rounded-2xl border border-[#d93dd1]/30 shadow-[0_0_20px_rgba(217,61,209,0.15)] p-8 flex justify-between items-center">
+                    <div>
+                        <h2 class="text-2xl font-bold text-gray-100 flex items-center gap-2">
+                            <span class="text-[#d93dd1] font-logo">root@code-jr:~#</span> Painel de Candidaturas
+                        </h2>
+                        <p class="text-gray-400 mt-1">Visualização de respostas submetidas</p>
+                    </div>
+                    <button onclick="showScreen('welcome-screen')" class="text-gray-400 hover:text-white font-mono px-4 py-2 bg-[#0d041c] border border-gray-700 rounded-lg hover:border-gray-500 transition-colors">cd ..</button>
+                </div>
+                
+                <div id="admin-loading" class="text-center py-8 hidden">
+                    <div class="inline-block animate-spin rounded-full h-8 w-8 border-b-2 border-[#d93dd1] mb-2"></div>
+                    <p class="text-gray-400 font-mono">Buscando dados no servidor...</p>
+                </div>
+
+                <div id="submissions-list" class="space-y-4">
+                    <!-- Respostas dos candidatos aparecerão aqui -->
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <footer class="text-center p-6 text-gray-500 text-sm font-mono">
+        <p>&copy; 2026 CODE[] Soluções em Tecnologia Júnior | <button onclick="enterAdminMode()" class="hover:text-[#d93dd1] cursor-pointer transition-colors">/admin</button></p>
+    </footer>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+        import { getAuth, signInAnonymously, signInWithCustomToken, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+        import { getFirestore, collection, addDoc, getDocs } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+
+        const appId = typeof __app_id !== 'undefined' ? __app_id : 'processo-seletivo-app';
+        const firebaseConfig = {
+            apiKey: "AIzaSyDk40qEO6Aj9d3j6EiiQsF7EvTLfUfCSD4",
+            authDomain: "pscode2s2026.firebaseapp.com",
+            projectId: "pscode2s2026",
+            storageBucket: "pscode2s2026.firebasestorage.app",
+            messagingSenderId: "522087837226",
+            appId: "1:522087837226:web:16205bc087b6aaa3919d53",
+            measurementId: "G-HYN94W88B7"
+        };
+        const authToken = typeof __initial_auth_token !== 'undefined' ? __initial_auth_token : null;
+
+        let app, db, auth, currentUser;
+        let candidateData = { name: '', email: '' };
+
+        const quizQuestions = [
+            {
+                id: 'q1',
+                type: 'radio',
+                title: 'Raciocínio Lógico: Qual é o próximo termo da sequência matemática: 1, 1, 2, 3, 5, 8, ...?',
+                options: ['10', '11', '12', '13']
+            },
+            {
+                id: 'q2',
+                type: 'radio',
+                title: 'Lógica Booleana: Dada a estrutura "SE (X > 5 E Y < 10) ENTAO", sabendo que X = 6 e Y = 10. A condição será avaliada como:',
+                options: ['Verdadeira (True)', 'Falsa (False)', 'Nula (Null)', 'Indeterminada']
+            },
+            {
+                id: 'q3',
+                type: 'text',
+                title: 'Algoritmo (Maior Número): Escreva em pseudocódigo um algoritmo que receba uma lista de inteiros e mostre qual é o MAIOR número dessa lista.',
+                placeholder: '// Escreva seu pseudocódigo aqui...\n\nINICIO\n  // sua lógica...\nFIM'
+            },
+            {
+                id: 'q4',
+                type: 'text',
+                title: 'Algoritmo (Múltiplos): Escreva um loop (1 a 15). Múltiplos de 3 = "Fizz". Múltiplos de 5 = "Buzz". Múltiplos de ambos = "FizzBuzz". Caso contrário = número.',
+                placeholder: '// Escreva seu pseudocódigo aqui...'
+            }
+        ];
+
+        async function initApp() {
+            try {
+                if (firebaseConfig.projectId === "mock-project") {
+                    console.warn("Rodando em modo MOCK. Sem conexão real com Firebase.");
+                    currentUser = { uid: 'mock-user-123' };
+                    updateStatus('Pronto', '#25f36e');
+                    renderQuestions();
+                    showScreen('welcome-screen');
+                    return;
+                }
+
+                app = initializeApp(firebaseConfig);
+                auth = getAuth(app);
+                db = getFirestore(app);
+
+                if (authToken) {
+                    await signInWithCustomToken(auth, authToken);
+                } else {
+                    await signInAnonymously(auth);
+                }
+
+                onAuthStateChanged(auth, (user) => {
+                    if (user) {
+                        currentUser = user;
+                        updateStatus('Online', '#25f36e');
+                        renderQuestions();
+                        showScreen('welcome-screen');
+                    }
+                });
+
+            } catch (error) {
+                console.error("Erro na inicialização:", error);
+                updateStatus('Erro de Conexão', '#ef4444');
+                document.getElementById('loading-screen').innerHTML = `
+                    <div class="text-red-500 mb-4"><svg class="w-12 h-12 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg></div>
+                    <p class="text-gray-100 font-medium">Falha na conexão.</p>
+                    <p class="text-gray-400 text-sm mt-2">Atualize a página e tente novamente.</p>
+                `;
+            }
+        }
+
+        function updateStatus(text, color) {
+            const statusEl = document.getElementById('user-status');
+            statusEl.textContent = text;
+            statusEl.style.color = color;
+            statusEl.style.borderColor = color;
+            statusEl.style.backgroundColor = `${color}20`;
+        }
+
+        window.showScreen = function(screenId) {
+            const screens = ['loading-screen', 'welcome-screen', 'quiz-screen', 'success-screen', 'admin-screen'];
+            screens.forEach(id => {
+                const el = document.getElementById(id);
+                if (id === screenId) {
+                    el.classList.remove('hidden');
+                } else {
+                    el.classList.add('hidden');
+                }
+            });
+            window.scrollTo(0, 0);
+        }
+
+        function renderQuestions() {
+            const container = document.getElementById('questions-container');
+            container.innerHTML = '';
+
+            quizQuestions.forEach((q, index) => {
+                const questionDiv = document.createElement('div');
+                questionDiv.className = 'bg-[#130729] p-6 rounded-xl border border-gray-700 hover:border-[#d93dd1]/50 transition-colors shadow-inner';
+
+                let inputHtml = '';
+                
+                if (q.type === 'radio') {
+                    const optionsHtml = q.options.map((opt, i) => `
+                        <label class="flex items-center gap-3 p-3 bg-[#0d041c] border border-gray-800 rounded-lg cursor-pointer hover:border-[#d93dd1] hover:shadow-[0_0_10px_rgba(217,61,209,0.2)] transition-all">
+                            <input type="radio" name="${q.id}" value="${opt}" required class="w-4 h-4 text-[#d93dd1] bg-[#130729] border-gray-600 focus:ring-[#d93dd1] focus:ring-offset-[#0d041c]">
+                            <span class="text-gray-300">${opt}</span>
+                        </label>
+                    `).join('');
+                    inputHtml = `<div class="space-y-3 mt-4">${optionsHtml}</div>`;
+                } 
+                else if (q.type === 'text') {
+                    inputHtml = `
+                        <div class="mt-4 relative group">
+                            <textarea name="${q.id}" required rows="8" placeholder="${q.placeholder}" class="w-full px-4 py-3 rounded-lg border border-gray-700 bg-[#0d041c] text-[#25f36e] focus:ring-1 focus:ring-[#d93dd1] focus:border-[#d93dd1] outline-none transition-all resize-y font-mono text-sm placeholder-gray-600 shadow-inner"></textarea>
+                            <div class="absolute top-2 right-3 text-xs text-gray-600 font-mono pointer-events-none group-focus-within:text-[#d93dd1] transition-colors">.txt</div>
+                        </div>
+                    `;
+                }
+
+                questionDiv.innerHTML = `
+                    <h3 class="text-lg font-semibold text-gray-100 flex gap-2 items-start">
+                        <span class="text-[#d93dd1] font-mono">${index + 1}.</span> 
+                        ${q.title}
+                    </h3>
+                    ${inputHtml}
+                `;
+                container.appendChild(questionDiv);
+            });
+        }
+
+        document.getElementById('welcome-form').addEventListener('submit', (e) => {
+            e.preventDefault();
+            candidateData.name = document.getElementById('candidate-name').value;
+            candidateData.email = document.getElementById('candidate-email').value;
+            showScreen('quiz-screen');
+        });
+
+        document.getElementById('quiz-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const btn = document.getElementById('submit-quiz-btn');
+            const originalText = btn.innerHTML;
+            
+            const formData = new FormData(e.target);
+            const answers = {};
+            for (let [key, value] of formData.entries()) {
+                answers[key] = value;
+            }
+
+            const submissionData = {
+                candidate: candidateData,
+                answers: answers,
+                submittedAt: new Date().toISOString(),
+                userId: currentUser ? currentUser.uid : 'unknown'
+            };
+
+            try {
+                btn.disabled = true;
+                btn.innerHTML = `<div class="inline-block animate-spin rounded-full h-5 w-5 border-b-2 border-[#0d041c] mr-2"></div> SALVANDO...`;
+
+                if (db) {
+                    const submissionsRef = collection(db, 'artifacts', appId, 'public', 'data', 'submissions');
+                    await addDoc(submissionsRef, submissionData);
+                } else {
+                    console.log("Mock Payload:", submissionData);
+                    await new Promise(r => setTimeout(r, 1000));
+                }
+                
+                showScreen('success-screen');
+
+            } catch (error) {
+                console.error("Erro ao salvar:", error);
+                alert("ERRO DE SISTEMA: Não foi possível realizar o commit das respostas.");
+            } finally {
+                btn.disabled = false;
+                btn.innerHTML = originalText;
+            }
+        });
+
+        window.enterAdminMode = async function() {
+            const pwd = prompt("Acesso ROOT. Insira a senha (admin):");
+            if (pwd !== 'admin') {
+                if(pwd !== null) alert("Acesso Negado.");
+                return;
+            }
+            
+            showScreen('admin-screen');
+            loadSubmissions();
+        }
+
+        async function loadSubmissions() {
+            const listEl = document.getElementById('submissions-list');
+            const loader = document.getElementById('admin-loading');
+            
+            listEl.innerHTML = '';
+            loader.classList.remove('hidden');
+
+            try {
+                let submissions = [];
+
+                if (db) {
+                    const submissionsRef = collection(db, 'artifacts', appId, 'public', 'data', 'submissions');
+                    const snapshot = await getDocs(submissionsRef);
+                    snapshot.forEach(doc => {
+                        submissions.push({ id: doc.id, ...doc.data() });
+                    });
+                } else {
+                    submissions = [
+                        { candidate: { name: "Alan Turing", email: "alan@computacao.br" }, submittedAt: new Date().toISOString(), answers: { q1: "13", q2: "Falsa (False)", q3: "INICIO\n  maior = lista[0]\n  PARA CADA num EM lista FACA\n    SE num > maior ENTAO\n      maior = num\n    FIM SE\n  FIM PARA\n  IMPRIMIR maior\nFIM", q4: "PARA i DE 1 A 15 FACA\n  SE i MOD 15 == 0 ENTAO IMPRIMIR 'FizzBuzz'\n  SENAO SE i MOD 3 == 0 ENTAO IMPRIMIR 'Fizz'\n  SENAO SE i MOD 5 == 0 ENTAO IMPRIMIR 'Buzz'\n  SENAO IMPRIMIR i\nFIM PARA" } }
+                    ];
+                }
+
+                submissions.sort((a, b) => new Date(b.submittedAt) - new Date(a.submittedAt));
+
+                loader.classList.add('hidden');
+
+                if (submissions.length === 0) {
+                    listEl.innerHTML = `<div class="p-8 text-center bg-[#130729] rounded-xl border border-gray-800 text-gray-500 font-mono">/dev/null - Nenhuma submissão encontrada.</div>`;
+                    return;
+                }
+
+                submissions.forEach(sub => {
+                    const dateStr = new Date(sub.submittedAt).toLocaleString('pt-BR');
+                    
+                    let answersHtml = '';
+                    quizQuestions.forEach(q => {
+                        const answer = sub.answers[q.id] || '<span class="text-gray-600 italic">null</span>';
+                        answersHtml += `
+                            <div class="mb-4 border-l-2 border-[#d93dd1] pl-3">
+                                <p class="text-xs font-semibold text-[#d93dd1] mb-1 font-mono">${q.title}</p>
+                                <p class="text-sm text-[#25f36e] whitespace-pre-wrap font-mono bg-[#0d041c] p-3 rounded border border-gray-800 shadow-inner">${answer}</p>
+                            </div>
+                        `;
+                    });
+
+                    const card = document.createElement('div');
+                    card.className = 'bg-[#130729] p-6 rounded-xl border border-gray-700 shadow-sm hover:border-[#25f36e]/50 transition-colors';
+                    card.innerHTML = `
+                        <div class="flex justify-between items-start mb-4">
+                            <div>
+                                <h4 class="text-lg font-bold text-gray-100 flex items-center gap-2">
+                                    <svg class="w-4 h-4 text-[#25f36e]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path></svg>
+                                    ${sub.candidate.name}
+                                </h4>
+                                <p class="text-sm text-gray-400 font-mono">${sub.candidate.email}</p>
+                            </div>
+                            <span class="text-[10px] bg-[#0d041c] text-[#25f36e] py-1 px-2 rounded font-mono border border-[#25f36e]/30">${dateStr}</span>
+                        </div>
+                        <div class="mt-4 pt-4 border-t border-gray-800">
+                            ${answersHtml}
+                        </div>
+                    `;
+                    listEl.appendChild(card);
+                });
+
+            } catch (error) {
+                console.error("Erro ao carregar respostas:", error);
+                loader.classList.add('hidden');
+                listEl.innerHTML = `<div class="p-4 bg-red-900/20 text-red-400 border border-red-500/30 rounded-lg font-mono">FATAL ERROR: Falha ao carregar os dados. Verifique o console.</div>`;
+            }
+        }
+
+        window.addEventListener('DOMContentLoaded', initApp);
+
+    </script>
+</body>
+</html>
